@@ -12,7 +12,7 @@ node {
     sh 'docker exec node npm run build'
     sh 'echo "YOUR COMMANDS HERE!"'
     sh 'docker kill node' 
-    // new change
+    // new change to test
   }
   stage('Cleanup') {
     // Use the Git plugin to checkout the code
