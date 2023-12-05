@@ -42,12 +42,12 @@ pipeline {
             steps {
                 script {
                     // Copy the Docker image to the EC2 instance
-                    sh "scp -i ~/awskey dockeruserambi/ambika-angadi/jenkins-react-app:${env.BUILD_NUMBER} ubuntu@3.75.210.46:/home/ubuntu"
+                    sh "scp -i /home/ambika/.ssh/awskey/awskey dockeruserambi/ambika-angadi/jenkins-react-app:${env.BUILD_NUMBER} ubuntu@3.75.210.46:/home/ubuntu"
 
                     // SSH into the EC2 instance and run the container
                     sshagent(['awskey']) {
                         sh """
-                            ssh -i ~/awskey ubuntu@3.75.210.46 << 'EOF'
+                            ssh -i /home/ambika/.ssh/awskey ubuntu@3.75.210.46 << 'EOF'
                             docker stop my-nginx-container || true
                             docker rm my-nginx-container || true
                             docker run -d --name my-nginx-container -p 80:80 dockeruserambi/ambika-angadi/jenkins-react-app:${env.BUILD_NUMBER}
