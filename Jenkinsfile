@@ -45,6 +45,7 @@ pipeline {
                     sh "/usr/bin/scp -i /home/ambika/.ssh/awskey dockeruserambi/ambika-angadi/jenkins-react-app:${env.BUILD_NUMBER} ubuntu@3.75.210.46:/home/ubuntu"
 
                     // SSH into the EC2 instance and run the container
+                    
                     sshagent(['awskey']) {
                         sh """
                             ssh -i /home/ambika/.ssh/awskey ubuntu@3.75.210.46 << 'EOF'
