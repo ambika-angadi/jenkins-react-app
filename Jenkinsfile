@@ -8,8 +8,8 @@ node {
     sh 'docker run -d --rm --name node -v ${WORKSPACE}:/var/app -w /var/app node:lts-bullseye tail -f /dev/null'
     sh 'docker exec node npm --version'
     sh 'docker exec node ls -la'
-    sh 'docker exec node cd jenkins-react-app && npm ci'
-    sh 'docker exec node cd jenkins-react-app && run build'
+    sh 'docker exec node npm ci'
+    sh 'docker exec node run build'
     sh 'echo "YOUR COMMANDS HERE!"'
     sh 'docker kill node' 
     // new change
