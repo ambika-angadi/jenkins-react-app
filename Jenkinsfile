@@ -38,6 +38,26 @@ pipeline {
             }
         }
 
+        stage('Deploy to EC2') {
+            steps {
+                script {
+                    def imageName = 'my-nginx-image'
+                    def containerName = 'my-nginx-container'
+                    def hostIP = '18.192.63.12'
+                    def hostPort = '80'
+
+                    // Stop and remove the existing container (if any)
+                    sh "docker stop ${containerName} || true"
+                    sh "docker rm ${containerName} || true"
+
+                    // Run the container with port mapping
+                    sh "docker run -d --name ${containerName} -p ${hostPort}:${hostPort} ${imageName}"
+
+                    echo "Deployment to EC2 completed."
+                }
+            }
+        }
+
         stage('Cleanup') {
             steps {
                 deleteDir()
